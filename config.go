@@ -1,12 +1,13 @@
-// Package lib contains a common library functionalities
-package lib
+package config
 
+// Package lib contains a common library functionalities
 import (
 	"fmt"
-	c "github.com/revel/config"
 	"os"
 	"path"
 	"strings"
+
+	c "github.com/revel/config"
 )
 
 var (
@@ -23,7 +24,10 @@ type Config struct {
 }
 
 // NewConfig creates a new configuration struct
-func NewConfig() (config *Config, err error) {
+func NewConfig(cfgfile ...string) (config *Config, err error) {
+	if len(cfgfile) > 0 {
+		filename = cfgfile[0]
+	}
 	config = &Config{Filename: filename}
 	if config.Pwd, err = os.Getwd(); err != nil {
 		fmt.Errorf("| Error | %v \n", err)
