@@ -61,3 +61,9 @@ func (c *Config) Default(property string) (result string) {
 	result, _ = c.base.String("default", property)
 	return
 }
+
+// Property gets any section configuration property
+func (c *Config) Property(section string, property string) (result string, err error) {
+	result, err = c.base.String(section, property)
+	return
+}
